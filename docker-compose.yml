@@ -1,0 +1,25 @@
+services:
+  php-apache-environment:
+    container_name: php_apache
+    build: 
+      context: ./src
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    # image: php:8.2-apache
+    volumes:
+      - ./src:/var/www/html/
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+  db:
+    container_name: mysql
+    image: mysql
+    restart : always
+    environment:
+      MYSQL_DATABASE: school_express_database
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_USER : se_user
+      MYSQL_PASSWORD: 123456
+    ports:
+      - "9906:3306"
