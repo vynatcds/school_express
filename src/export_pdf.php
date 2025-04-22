@@ -1,10 +1,16 @@
 <?php
-require('tcpdf/tcpdf.php');
+require_once('./vendor/autoload.php');
 include "db.php";
 
-$pdf = new TCPDF();
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+define('SARABUN_BOLDR', TCPDF_FONTS::addTTFfont(dirname(__FILE__).'/fonts/Sarabun-Bold.ttf', 'TrueTypeUnicode'));
+define('SARABUN_REGULAR', TCPDF_FONTS::addTTFfont(dirname(__FILE__).'/fonts/Sarabun-Regular.ttf', 'TrueTypeUnicode'));
+
 $pdf->AddPage();
-$pdf->SetFont('thsarabun', '', 16);
+$pdf->SetFont(SARABUN_REGULAR, '', 16);
+
+
 
 $html = '<h2>รายงานการเช็คชื่อ</h2><table border="1" cellpadding="4"><tr>
   <th>วันที่</th><th>รหัส</th><th>ชื่อ</th><th>สกุล</th><th>สถานะ</th></tr>';

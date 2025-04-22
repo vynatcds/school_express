@@ -102,33 +102,30 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>12345</td>
-          <td>สมชาย</td>
-          <td>ใจดี</td>
-          <td>
-            <select>
-              <option>ปกติ</option>
-              <option>สาย</option>
-              <option>ขาด</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>12346</td>
-          <td>สุนีย์</td>
-          <td>ใจงาม</td>
-          <td>
-            <select>
-              <option>ปกติ</option>
-              <option>สาย</option>
-              <option>ขาด</option>
-            </select>
-          </td>
-        </tr>
-        <!-- เพิ่มนักเรียนได้อีกตามต้องการ -->
+              <?php
+                $sql = "SELECT *
+                        FROM students
+                        ORDER BY student_id ASC";
+                $result = $conn->query($sql);
+
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                          <td>{$row['student_id']}</td>
+                          <td>{$row['student_id']}</td>
+                          <td>{$row['firstname']}</td>
+                          <td>{$row['lastname']}</td>
+                          <td>
+                              <select name='status[{$row['student_id']}]'>
+                                <option>ปกติ</option>
+                                <option>สาย</option>
+                                <option>ลา</option>
+                                <option>ขาด</option>
+                              </select>
+                          </td>
+                        </tr>";
+                }
+                ?>
+       
       </tbody>
     </table>
     <div style="text-align: center; margin-top: 20px;">
